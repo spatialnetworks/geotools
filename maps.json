@@ -1,0 +1,34 @@
+[
+	{
+		"region": "Africa",
+		"country": "Egypt",
+		"geonameid": "360630",
+		"bounds": [ 30.897, 29.761, 31.710, 30.564 ],
+		"minzoom": 11,
+		"maxzoom": 16,
+		"slug": "cairo",
+		"name": "Cairo"
+	},
+
+	{
+		"region": "Africa",
+		"country": "Uganda",
+		"geonameid": "360631",
+		"bounds": [ 32.457, 0.184, 32.725, 0.436 ],
+		"minzoom": 11,
+		"maxzoom": 14,
+		"slug": "kampala",
+		"name": "Kampala"
+	},
+
+	{
+		"region": "Africa",
+		"country": "Nigeria",
+		"geonameid": "36063444",
+		"bounds": [ 3.193, 6.388, 3.506, 6.652 ],
+		"minzoom": 11,
+		"maxzoom": 16,
+		"slug": "lagos",
+		"name": "Lagos"
+	}
+]

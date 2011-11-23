@@ -1,0 +1,119 @@
+{
+	
+	// Create the city definition for extracting OSM data and automating
+	// exports from TileMill.
+	{
+	"region": "Africa",
+	"country": "Egypt",
+	"geonameid": "360630",
+	// left, bottom, right, top -- in that order
+	"bounds": [ 30.897, 29.761, 31.710, 30.564 ],
+	"minzoom": 11,
+	"maxzoom": 16,
+	"slug": "cairo",
+	"name": "Cairo"
+	}
+
+
+	Tunis, Tunisia:
+		"bounds": [ 9.935, 36.556, 10.551, 36.996 ]
+
+	Algiers, Algeria:
+		"bounds": [ 2.609, 36.374, 3.559, 36.889 ]
+
+	Oran, Algeria
+		"bounds": [ -0.847, 35.6, -0.508, 35.795 ]
+
+	Tangier, Morocco
+		"bounds": [ -6.033, 35.63, -5.611, 35.86 ]
+
+	Rabat, Morocco
+		"bounds": [ -7.139, 33.845, -6.518, 34.154 ]
+
+	Kampala, Uganda
+		"bounds": [ 32.457, 0.184, 32.725, 0.436 ]
+	
+	Lagos, Nigeria
+		"bounds": [ 3.193, 6.388, 3.506, 6.652 ]
+
+	Kinshasa-Brazzaville, DRC-Rep of Congo
+		"bounds": [ 15.11, -4.49, 15.507, -4.178 ]
+
+	Johannesburg, South Africa
+		"bounds": [ 27.64, -26.492, 28.453, -25.91 ]
+
+	Khartoum, Sudan
+		"bounds": [ 32.277, 15.274, 32.763, 15.891 ]
+
+	Alexandria, Egypt
+		"bounds": [ 29.681, 30.99, 30.137, 31.349 ]
+
+	Abidjan, Côte d'Ivoire
+		"bounds": [ -4.215, 5.209, -3.82, 5.513 ]
+	
+	Casablanca, Morocco
+		"bounds": [ -7.841, 33.324, -7.308, 33.754 ]
+	
+	Cape Town, South Africa
+		"bounds": [ 18.261, -34.385, 18.81, -33.803 ]
+	
+	Durban, South Africa
+		"bounds": [ 30.877, -29.972, 31.085, -29.759 ]
+
+	Accra, Ghana
+		"bounds": [ -0.354, 5.502, -0.063, 5.695 ]
+	
+	Nairobi, Kenya
+		"bounds": [ 36.612, -1.435, 37.009, -1.145 ]
+	
+	Addis Ababa, Ethiopia
+		"bounds": [ 38.621, 8.818, 38.922, 9.119 ]
+	
+	Luanda, Angola
+		"bounds": [ 13.087, -9.024, 13.402, -8.738 ]
+	
+	Dakar, Senegal
+		"bounds": [ -17.583, 14.633, -17.298, 14.807 ]
+	
+	Pretoria, South Africa
+		"bounds": [ 27.923, -25.931, 28.461, -25.586 ]
+	
+	Harare, Zimbabwe
+		"bounds": [ 30.86, -17.974, 31.176, -17.705 ]
+	
+	Douala, Cameroon
+		"bounds": [ 9.643, 3.9767, 9.8092, 4.1092 ]
+	
+	Bamako, Mali
+		"bounds": [ -8.118, 12.521, -7.861, 12.767 ]
+	
+	Maputo, Mozambique
+		"bounds": [ 32.36, -26.103, 32.702, -25.784 ]
+	
+	Antananarivo, Madagascar
+		"bounds": [ 47.366, -19.086, 47.729, -18.73 ]
+	
+	Lusaka, Zambia
+		"bounds": [ 28.083, -15.589, 28.499, -15.298 ]
+	
+	Ouagadougou, Burkina Faso
+		"bounds": [ -1.674, 12.252, -1.367, 12.471 ]
+	
+	Conakry, Guinea
+		"bounds": [ -13.737, 9.49, -13.551, 9.676 ]
+
+	Mogadishu, Somalia
+		"bounds": [ 45.144, 1.964, 45.432, 2.139 ]
+	
+	Tripoli, Libya
+		"bounds": [ 12.881, 32.602, 13.528, 32.964 ]
+	
+	Benghazi, Libya
+		"bounds": [ 19.915, 31.934, 20.322, 32.293 ]
+	
+	Freetown, Sierra Leone
+		"bounds": [ -13.319, 8.363, -13.099, 8.52 ]
+	
+	
+
+}
