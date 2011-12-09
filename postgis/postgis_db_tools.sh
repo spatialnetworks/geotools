@@ -11,3 +11,11 @@ function creategisdb() {
 	psql --username=postgres -d $1 -f ~/Dropbox/tools/postgis/postgis.sql
 	psql --username=postgres -d $1 -f ~/Dropbox/tools/postgis/spatial_ref_sys.sql
 }
+
+# Uses imposm and an OSM .pbf or .bz2 extract to read, write, and optimize in a new PostGIS database
+# usage: imposmimport dbname 
+# note: database must be precreated (hopefully with creategisdb)
+
+function imposmimport() {
+	imposm --read --write --optimize --deploy-production-tables -d $1 -U postgres 
+}
