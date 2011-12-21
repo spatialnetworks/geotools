@@ -1,0 +1,8 @@
+Antarctica GeoTIFF
+ * Extract georeference with `listgeo -no_norm antarctica_color.tif > antarctica_color.geo`
+ * Surface Blur 24 / 34
+ * Add Noise 2%
+ * Plastic Wrap filter 2 / 15 / 1
+ * Edge Filter 1 / 20 / 1
+ * Hillshade with 1% opacity set to Overlay or Soft Light blending mode
+ * Re-apply georeference with `geotifcp -g antarctica_color.geo antarctica_color_modified.tif antarctica_color_final.tif`
