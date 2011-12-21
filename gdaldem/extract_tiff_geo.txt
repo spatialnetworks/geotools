@@ -1,0 +1,5 @@
+Extract geo reference
+listgeo -no_norm haiti_dem_color.tif > haiti_dem_color.geo
+
+Apply georeference
+geotifcp -g haiti_dem_color.geo haiti_dem_color.tif haiti_dem_color_geo.tif
