@@ -1,0 +1,14 @@
+{
+  "name": "geotools",
+  "version": "0.0.1",
+  "description": "Spatial Networks Geotools",
+  "author": "Zac McCormick <zac.mccormick@gmail.com>",
+  "dependencies": {
+    "geocoder": "0.x.x",
+    "color": "0.x.x",
+    "optimist": "0.x.x"
+  },
+  "devDependencies": {
+  },
+  "engine": "node >= 0.4.1"
+}

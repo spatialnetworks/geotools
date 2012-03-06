@@ -1,28 +1,27 @@
 
-PREFIX ?= ~/local/bin/geotools
+BIN_PREFIX ?= ~/local/geotools/bin
+LIB_PREFIX ?= ~/local/geotools/lib
 
-SRC_IMAGERY   := blue_marble_bb blue_marble_slice gdalwarp_merc merge project shpextents
-SRC_GDALGEM   := colorize hillshade contour
-SRC_GRATICULE := graticule
-SRC_TILEMILL  := automill multimill tilemill_project optimize
+BIN_SCRIPTS := $(wildcard src/*)
+LIB_SCRIPTS := $(wildcard lib/*)
 
 install:
-	mkdir -p $(PREFIX)
-	
-	cp $(foreach script, $(SRC_IMAGERY),   imagery_tools/$(script)) $(PREFIX)
-	cp $(foreach script, $(SRC_GDALGEM),   gdaldem/$(script))       $(PREFIX)
-	cp $(foreach script, $(SRC_GRATICULE), graticules/$(script))    $(PREFIX)
-	cp $(foreach script, $(SRC_TILEMILL),  tilemill/$(script))      $(PREFIX)
+	mkdir -p $(BIN_PREFIX)
+	mkdir -p $(LIB_PREFIX)
 
-	chmod +x $(PREFIX)/*
+	cp $(BIN_SCRIPTS) $(BIN_PREFIX)
+	cp $(LIB_SCRIPTS) $(LIB_PREFIX)
 
-	@echo "Installed:"
+	chmod +x $(BIN_PREFIX)/*
 
-	ls $(PREFIX)
+	cd $(BIN_PREFIX) && npm install
 
-	@echo "Make sure $(PREFIX) is in your PATH"
+	ls $(BIN_PREFIX)
+
+	@echo "Make sure $(BIN_PREFIX) is in your PATH"
 
 uninstall:
-	rm -rf $(PREFIX)
+	rm -rf $(BIN_PREFIX)
+	rm -rf $(LIB_PREFIX)
 
 .PHONY: install uninstall
