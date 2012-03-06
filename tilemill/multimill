@@ -1,3 +1,4 @@
+#/usr/bin/env ruby
 # MultiMill - Automates TileMill exports
 # Usage: ruby multimill --map=cairo
 

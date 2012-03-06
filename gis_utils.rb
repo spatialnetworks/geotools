@@ -7,6 +7,24 @@ require 'gdal/osr'
 
 class GisUtils
 	WGS84 = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+  MERCATOR = "+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6378137 +lat_ts=0.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+  MERCATOR_BOUNDS = "-180.0 -85.05112877980659 180 85.05112877980659"
+
+  def self.sqlite_driver
+    Gdal::Ogr.get_driver_by_name('SQLite')
+  end
+
+  def self.open_sqlite(path)
+		GisUtils.sqlite_driver.open(path)
+  end
+
+  def self.create_sqlite(db_path)
+		driver_options = ['SPATIALITE=yes']
+
+		File.delete(db_path) if File.exists?(db_path)
+
+		self.sqlite_driver.create_data_source(db_path, ['SPATIALITE=yes'])
+  end
 
 	def self.save_shapefile(path, form, documents)
 		save_points('ESRI Shapefile', [], path, form, documents)

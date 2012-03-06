@@ -1,3 +1,4 @@
+#!/bin/bash
 # slice Blue Marble imagery into four smaller quadrants, to fit in TileMill
 
 gdalwarp -te -180 0 0 90 bluemarble.tif bluemarble-0.tif

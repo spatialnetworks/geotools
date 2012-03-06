@@ -1,3 +1,4 @@
+#!/bin/bash
 # Convert image from WGS84 to Web Mercator
 # gdalwarp_merc.sh inputfile outputfile
 
