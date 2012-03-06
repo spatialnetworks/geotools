@@ -1,6 +1,7 @@
 
-BIN_PREFIX ?= ~/local/geotools/bin
-LIB_PREFIX ?= ~/local/geotools/lib
+PREFIX     ?= ~/local/geotools
+BIN_PREFIX ?= $(PREFIX)/bin
+LIB_PREFIX ?= $(PREFIX)/lib
 
 BIN_SCRIPTS := $(wildcard src/*)
 LIB_SCRIPTS := $(wildcard lib/*)
@@ -14,7 +15,7 @@ install:
 
 	chmod +x $(BIN_PREFIX)/*
 
-	cd $(BIN_PREFIX) && npm install
+	cp package.json $(PREFIX) && cd $(PREFIX) && npm install
 
 	ls $(BIN_PREFIX)
 

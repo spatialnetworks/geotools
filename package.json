@@ -6,7 +6,9 @@
   "dependencies": {
     "geocoder": "0.x.x",
     "color": "0.x.x",
-    "optimist": "0.x.x"
+    "optimist": "0.x.x",
+    "ya-csv": "0.x.x",
+    "sqlite3": "2.x.x"
   },
   "devDependencies": {
   },

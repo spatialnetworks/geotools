@@ -1,10 +1,12 @@
+#!/usr/bin/env node
+
 var csv = require('ya-csv');
 var sql = require('sqlite3').verbose();
 var fs = require('fs');
 var db;
 
-require('./priority_queue');
-require('./procedure');
+require('../lib/priority_queue');
+require('../lib/procedure');
 
 
 MAX_IMPORT_ROWS = 100000;
