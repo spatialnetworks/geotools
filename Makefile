@@ -12,6 +12,8 @@ install:
 
 	cp $(BIN_SCRIPTS) $(BIN_PREFIX)
 	cp $(LIB_SCRIPTS) $(LIB_PREFIX)
+	
+	for file in $(BIN_PREFIX)/* ; do mv $$file `echo $$file | cut -d'.' -f1` ; done
 
 	chmod +x $(BIN_PREFIX)/*
 
