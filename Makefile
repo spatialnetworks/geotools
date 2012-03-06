@@ -24,5 +24,6 @@ install:
 uninstall:
 	rm -rf $(BIN_PREFIX)
 	rm -rf $(LIB_PREFIX)
+	rm -rf $(PREFIX)
 
 .PHONY: install uninstall

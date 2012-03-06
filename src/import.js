@@ -2,7 +2,7 @@
 
 var csv = require('ya-csv');
 var sql = require('sqlite3').verbose();
-var fs = require('fs');
+var fs  = require('fs');
 var db;
 
 require('../lib/priority_queue');
@@ -13,9 +13,14 @@ MAX_IMPORT_ROWS = 100000;
 
 var queue = new PriorityQueue();
 var proc = new Procedure();
+
+if (process.argv.length < 3) {
+  console.log('Error: you must specify an input csv file.');
+  process.exit(1);
+}
+
 var csvFileName = process.argv[2];
 var outputDatabaseName = csvFileName.substr(0, csvFileName.length - 4) + '.db';
-
 
 Points = [];
 Clusters = {};
