@@ -11,7 +11,7 @@ wget http://download.geonames.org/export/dump/iso-languagecodes.txt
 
 ## Create tables
 
-```
+```sql
 create table geoname (
 	geonameid	int,
 	name varchar(200),
@@ -35,7 +35,7 @@ create table geoname (
  );
 ```
 
-```
+```sql
 create table alternatename (
 	alternatenameId int,
 	geonameid int,
@@ -46,7 +46,7 @@ create table alternatename (
  );
 ```
 
-```
+```sql
 create table "countryinfo" (
 	iso_alpha2 char(2),
 	iso_alpha3 char(3),
