@@ -1,7 +1,9 @@
 # GeoNames import to Postgres
-This is a guide to getting the raw text formatted GeoNames data dumps structured and imported into a PostGIS database.
+This is a guide to getting the raw text formatted [GeoNames](http://www.geonames.org/) data dumps structured and imported into a PostGIS database. It imports all related GeoNames data into tables, creates the proper geometry and indexes, as well as foreign key mappings between the tables.
 
-## Download source data
+The[ feature codes list](http://download.geonames.org/export/dump/featureCodes_en.txt) is useful for determining what `fcode` features you want to extract from the `geoname` table for use in maps or derivative datasets.
+
+### Download source data
 
 ```bash
 wget http://download.geonames.org/export/dump/allCountries.zip
@@ -10,7 +12,22 @@ wget http://download.geonames.org/export/dump/countryInfo.txt
 wget http://download.geonames.org/export/dump/iso-languagecodes.txt
 ```
 
-## Create tables
+```bash
+unzip allCountries.zip
+unzip alternateNames.zip
+```
+
+### Create the database
+```bash
+createdb --username=postgres geonames
+createlang --username=postgres plpgsql geonames
+psql --username=postgres -d geonames -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
+psql --username=postgres -d geonames -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql
+psql --username=postgres -d geonames -f /usr/share/postgresql/9.1/contrib/postgis_comments.sql
+```
+
+### Create tables
+_Note: the attribute lengths are subject to change depending on the vintage of the GeoNames dataset. The columns need to be sized appropriately to accommodate what's currently in the dataset, which changes - particularly the `alternatenames` column._
 
 ```sql
 create table geoname (
@@ -70,21 +87,22 @@ create table "countryinfo" (
 	equivfipscode varchar(3)
 );
 ```
-### Insert the data
+#### Insert the data
+Run these from the SQL prompt as a permitted user.
 
 ```sql
-copy geoname (geonameid,name,asciiname,alternatenames,latitude,longitude,fclass,fcode,country,cc2,admin1,admin2,admin3,admin4,population,elevation,gtopo30,timezone,moddate) from '/home/linuxadmin/geonames/allCountries.txt' null as '';
+copy geoname (geonameid,name,asciiname,alternatenames,latitude,longitude,fclass,fcode,country,cc2,admin1,admin2,admin3,admin4,population,elevation,gtopo30,timezone,moddate) from 'allCountries.txt' null as '';
 ```
 
 ```sql
-copy alternatename  (alternatenameid,geonameid,isolanguage,alternatename,ispreferredname,isshortname) from '/home/linuxadmin/geonames/alternateNames.txt' null as '';
+copy alternatename  (alternatenameid,geonameid,isolanguage,alternatename,ispreferredname,isshortname) from 'alternateNames.txt' null as '';
 ```
 
 ```sql
-copy countryinfo (iso_alpha2,iso_alpha3,iso_numeric,fips_code,name,capital,areainsqkm,population,continent,tld,currencycode,currencyname,phone,postalcode,postalcoderegex,languages,geonameid,neighbors,equivfipscode) from '/home/linuxadmin/geonames/countryInfo.txt' null as '';
+copy countryinfo (iso_alpha2,iso_alpha3,iso_numeric,fips_code,name,capital,areainsqkm,population,continent,tld,currencycode,currencyname,phone,postalcode,postalcoderegex,languages,geonameid,neighbors,equivfipscode) from 'countryInfo.txt' null as '';
 ```
 
-## Add primary key & foreign key constraints
+### Add primary key & foreign key constraints
 
 ```sql
 ALTER TABLE ONLY alternatename
@@ -100,7 +118,7 @@ ALTER TABLE ONLY alternatename
       ADD CONSTRAINT fk_geonameid FOREIGN KEY (geonameid) REFERENCES geoname(geonameid);
 ```
 
-## Create PostGIS geometry column, insert geometry, and create indexes
+### Create PostGIS geometry column, insert geometry, and create indexes
 ```sql
 SELECT AddGeometryColumn ('public','geoname','the_geom',4326,'POINT',2);
 
