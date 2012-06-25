@@ -25,30 +25,22 @@ class OsmStats < Thor
 
     data = JSON.parse(`curl -s "#{api_url}?data=#{params}"`)
 
-    nodes     = data['elements'].select {|e| e['type'] == 'node'}
-    ways      = data['elements'].select {|e| e['type'] == 'way'}
-    relations = data['elements'].select {|e| e['type'] == 'relation'}
+    grouped = data['elements'].group_by { |e| e['type'] }
 
-    breakdown = {}
-
-    data['elements'].each do |e|
-      e['tags'].each do |t|
-        key = "#{t[0].downcase}=#{t[1].downcase}"
-        breakdown[key] = (breakdown[key] || 0) + 1
-      end if e['tags']
-    end
-
-    puts "nodes     : #{nodes.count}"
-    puts "ways      : #{ways.count}"
-    puts "relations : #{relations.count}"
+    puts "nodes     : #{grouped['node'].count}"
+    puts "ways      : #{grouped['way'].count}"
+    puts "relations : #{grouped['relation'].count}"
 
     puts "--- Top 20 tags ---"
 
-    breakdown.delete_if {|k,v| k.match /^tiger/ }
-             .sort_by {|k,v| v }
-             .last(20)
-             .reverse
-             .each {|k,v| puts "#{k} : #{v}" }
+    data['elements'].flat_map  { |e| e['tags'].map {|k,v| {key: "#{k}=#{v}"} } if e['tags']}
+                    .compact
+                    .group_by  { |tag| tag[:key] }
+                    .reject    { |key, tags| key =~ /^tiger|gnis/ }
+                    .sort_by   { |key, tags| tags.count }
+                    .last(20)
+                    .reverse
+                    .each      { |key, tags| puts "#{key} : #{tags.count}" }
 
   end
 end
