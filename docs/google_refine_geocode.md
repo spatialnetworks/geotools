@@ -21,11 +21,11 @@ Once geocoding is complete and you have a fully populated column, select the `js
 2. Enter this to extract `lat`:
 
 ```
-with(value.parseJson()[0]), pair, pair.lat)
+with(value.parseJson()[0], pair, pair.lat)
 ```
 
 3. Do the same thing again to get the `lon`:
 
 ```
-with(value.parseJson()[0]), pair, pair.lon)
+with(value.parseJson()[0], pair, pair.lon)
 ```
