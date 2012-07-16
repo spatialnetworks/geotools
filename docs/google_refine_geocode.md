@@ -16,5 +16,9 @@
 
 Once geocoding is complete and you have a fully populated column, select the `json` column and pick "Add column based on this column"
 
-with(value.parseJson()[0]), pair, pair.lat)
+### Extracting `lat,lon`
+1. Find the column with your JSON response and select "Add column based on this column"
+2. Enter this to extract `lat`:
+
+    with(value.parseJson()[0]), pair, pair.lat)
 
