@@ -43,6 +43,45 @@ class OsmStats < Thor
                     .each      { |key, tags| puts "#{key} : #{tags.count}" }
 
   end
+
+  desc "tags", "get feature count for a specific tag"
+  method_option :key, :aliases => "-k", :desc => "OSM key, (e.g. amenity)"
+  method_option :value, :aliases => "-v", :desc => "Key value, (e.g. fountain)"
+  def tags
+    api_url = "http://overpass.osm.rambler.ru/cgi/interpreter"
+    
+    params = CGI.escape(
+      [
+        "[out:json];",
+        "node[\"#{options[:key]}\"=\"#{options[:value]}\"];",
+        "out meta;"
+      ].join('')
+    )    
+    
+    data = JSON.parse(`curl -s "#{api_url}?data=#{params}"`)
+    
+    puts JSON.pretty_generate(data)
+  end
+  
+  desc "count", "Fetch a count for a specific 'key=value' pair."
+  method_option :key, :aliases => "-k", :desc => "OSM key, (e.g. amenity)", :required => true
+  method_option :value, :aliases => "-v", :desc => "Key value, (e.g. fountain)", :required => true
+  def count
+    api_url = "http://overpass.osm.rambler.ru/cgi/interpreter"
+    
+    params = CGI.escape(
+      [
+        "[out:json];",
+        "node[\"#{options[:key]}\"=\"#{options[:value]}\"];",
+        "out body;"
+      ].join('')
+    )
+    
+    data = JSON.parse(`curl -s "#{api_url}?data=#{params}"`)
+    
+    puts data["elements"].length
+  end
+  
 end
 
 OsmStats.start
