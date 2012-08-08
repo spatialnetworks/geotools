@@ -23,9 +23,11 @@ var Ramp = {
     var base_color = Color(base);
     var output_colors = [];
     var step  = (stop - start) / steps;
-    console.log(step + ' ' + steps + ' ' + start + ' ' + stop + ' ' + file);
+    //console.log(step + ' ' + steps + ' ' + start + ' ' + stop + ' ' + file);
 
-    for (var i = start, j = height; stop > start ? i <= stop : i >= stop; i += step, j -= height/steps) {
+    var startValue = height > 0 ? height : 0;
+
+    for (var i = start, j = startValue; stop > start ? i <= stop : i >= stop; i += step, j -= height/steps) {
       var ramped = Color(base_color.hexString());
 
       if (argv.type == 'hue') {
@@ -35,7 +37,7 @@ var Ramp = {
       }
       //ramped = ramped.rotate(i);
 
-      var map = [parseInt(j), ramped.rgbArray()[0], ramped.rgbArray()[1], ramped.rgbArray()[2]];
+      var map = [parseInt(j) * (height > 0 ? 1 : -1), ramped.rgbArray()[0], ramped.rgbArray()[1], ramped.rgbArray()[2]];
 
       output_colors.push(map);
     }
@@ -46,9 +48,6 @@ var Ramp = {
       c.push(255);
       lines.push(c.join(' '));
     });
-
-    lines.push('0 174 162 144 255');
-    lines.push('-32768 200 230 255 0');
 
     fs.writeFileSync(file, lines.join('\n'), 'utf8');
 
