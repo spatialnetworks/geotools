@@ -22,16 +22,18 @@ class Mb < Thor
     overlay_db = SQLite3::Database.new(options[:overlay])
     output_db  = SQLite3::Database.new(options[:output])
 
-    basemap_db.execute("select * from tiles order by zoom_level, tile_column, tile_row") do |row|
-      result = Magick::Image::from_blob(row[3]).first
+    output_db.busy_timeout(100)
+
+    basemap_db.execute("select * from map m inner join images i on m.tile_id=i.tile_id order by zoom_level, tile_column, tile_row") do |row|
+      result = Magick::Image::from_blob(row[5]).first
 
       overlay_db.execute("select * from tiles where zoom_level = #{row[0]} and tile_column = #{row[1]} and tile_row = #{row[2]}") do |overlay_row|
         overlay_img = Magick::Image::from_blob(overlay_row[3]).first
         result = result.composite(overlay_img, Magick::CenterGravity, Magick::OverCompositeOp)
       end
 
-      output_db.execute("update tiles set tile_data = ? where zoom_level = ? and tile_column = ? and tile_row = ?",
-        SQLite3::Blob.new(result.to_blob), row[0], row[1], row[2])
+      output_db.execute("update images set tile_data = ? where tile_id = ?",
+        SQLite3::Blob.new(result.to_blob), row[3])
     end
   end
 end
