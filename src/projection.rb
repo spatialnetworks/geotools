@@ -31,6 +31,10 @@ class Pj < Thor
       proj_wkt = `ogrinfo -so #{options[:file]} #{layer_name} | sed '1,/Layer SRS WKT:/d'` rescue nil
     end
 
+    raise "Unable to determine coordinate system." if proj_wkt.nil? or proj_wkt.empty?
+
+    puts proj_wkt if options[:verbose]
+
     puts "Requesting http://prj2epsg.org/search.json?exact=false&terms=#{CGI.escape(proj_wkt)}" if options[:verbose] and !options[:quiet]
 
     hits = JSON.parse(`curl -s http://prj2epsg.org/search.json?terms=#{CGI.escape(proj_wkt)}`)
